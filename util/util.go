@@ -14,13 +14,15 @@ import (
 )
 
 func LoadConfig() *models.Config {
-	viper.SetConfigFile("./envs/.env")
+	//https://github.com/Jansen-Stanlie/MPSBE-Engine/blob/main/envs/.env
+	viper.SetConfigFile("github.com/Jansen-Stanlie/MPSBE-Engine/envs/.env")
 	viper.ReadInConfig()
 
 	port := viper.Get("PORT").(string)
 
-	fmt.Println("port : " + port)
 	dbUrl := viper.Get("DB_URL").(string)
+	fmt.Println("port : " + port)
+	fmt.Println("dbUrl : " + dbUrl)
 
 	h := db.Init(dbUrl)
 
