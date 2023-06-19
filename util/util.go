@@ -1,6 +1,10 @@
 package util
 
 import (
+	"crypto/aes"
+	"crypto/cipher"
+	"encoding/hex"
+	"fmt"
 	"github.com/Jansen-Stanlie/MPSBE-Engine/pkg/common/db"
 	"github.com/Jansen-Stanlie/MPSBE-Engine/pkg/common/models"
 	"github.com/gin-gonic/gin"
@@ -14,6 +18,8 @@ func LoadConfig() *models.Config {
 	viper.ReadInConfig()
 
 	port := viper.Get("PORT").(string)
+
+	fmt.Println("port : " + port)
 	dbUrl := viper.Get("DB_URL").(string)
 
 	h := db.Init(dbUrl)
@@ -34,4 +40,36 @@ func LoadConfig() *models.Config {
 	}
 
 	return config
+}
+
+func decrypt(encryptedString string, keyString string) (decryptedString string) {
+
+	key, _ := hex.DecodeString(keyString)
+	enc, _ := hex.DecodeString(encryptedString)
+
+	//Create a new Cipher Block from the key
+	block, err := aes.NewCipher(key)
+	if err != nil {
+		panic(err.Error())
+	}
+
+	//Create a new GCM
+	aesGCM, err := cipher.NewGCM(block)
+	if err != nil {
+		panic(err.Error())
+	}
+
+	//Get the nonce size
+	nonceSize := aesGCM.NonceSize()
+
+	//Extract the nonce from the encrypted data
+	nonce, ciphertext := enc[:nonceSize], enc[nonceSize:]
+
+	//Decrypt the data
+	plaintext, err := aesGCM.Open(nil, nonce, ciphertext, nil)
+	if err != nil {
+		panic(err.Error())
+	}
+
+	return fmt.Sprintf("%s", plaintext)
 }

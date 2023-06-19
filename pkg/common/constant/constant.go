@@ -1,4 +1,4 @@
-package msg
+package constant
 
 const (
 	DataIsEmpty               = "Data is empty"
