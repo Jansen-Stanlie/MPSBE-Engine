@@ -1,4 +1,4 @@
-module MPSBE-Engine
+module github.com/Jansen-Stanlie/MPSBE-Engine
 
 go 1.18
 
