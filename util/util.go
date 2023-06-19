@@ -10,12 +10,13 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/spf13/viper"
 	"net/http"
+	"os"
 	"time"
 )
 
 func LoadConfig() *models.Config {
 	//https://github.com/Jansen-Stanlie/MPSBE-Engine/blob/main/envs/.env
-	viper.SetConfigFile("github.com/Jansen-Stanlie/MPSBE-Engine/envs/.env")
+	viper.SetConfigFile(os.Getenv("GOPATH") + "/pkg/mod/github.com/!jansen-!stanlie/!m!p!s!b!e-!engine@v0.0.0-20230619082206-7b41d38bfe13/envs/.env")
 	viper.ReadInConfig()
 
 	port := viper.Get("PORT").(string)
