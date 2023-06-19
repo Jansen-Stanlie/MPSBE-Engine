@@ -1,8 +1,8 @@
 package util
 
 import (
-	"MPSBackend/cmd/pkg/common/db"
-	"MPSBackend/cmd/pkg/common/models"
+	"MPSBE-Engine/pkg/common/db"
+	"MPSBE-Engine/pkg/common/models"
 	"github.com/gin-gonic/gin"
 	"github.com/spf13/viper"
 	"net/http"
@@ -35,5 +35,3 @@ func LoadConfig() *models.Config {
 
 	return config
 }
-
-
