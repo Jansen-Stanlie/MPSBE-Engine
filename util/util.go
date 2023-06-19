@@ -1,8 +1,8 @@
 package util
 
 import (
-	"MPSBE-Engine/pkg/common/db"
-	"MPSBE-Engine/pkg/common/models"
+	"github.com/Jansen-Stanlie/MPSBE-Engine/pkg/common/db"
+	"github.com/Jansen-Stanlie/MPSBE-Engine/pkg/common/models"
 	"github.com/gin-gonic/gin"
 	"github.com/spf13/viper"
 	"net/http"
